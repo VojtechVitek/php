@@ -1,0 +1,10 @@
+#!/bin/bash -e
+
+pushd ${APP_RUNTIME_DIR} >/dev/null
+
+# Composer
+if [[ ( -f ./src/composer.lock || -f ./src/composer.json ) && -d ./src/vendor ]]; then
+  tar cf - ./src/vendor
+fi
+
+popd >/dev/null

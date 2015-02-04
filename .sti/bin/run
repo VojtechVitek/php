@@ -1,0 +1,11 @@
+#!/bin/bash -e
+
+# source "/etc/profile.d/enablehttpd24.sh"
+# source "/etc/profile.d/enablephp55.sh"
+
+# Allow users to inspect/debug the builder image itself, by using:
+# $ docker run -i -t openshift/centos-nodejs-builder --debug
+#
+[ "$1" == "--debug" ] && exec /bin/bash
+
+exec /usr/sbin/httpd -D FOREGROUND

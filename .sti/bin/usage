@@ -1,0 +1,10 @@
+#!/bin/sh
+
+cat <<EOF
+This image is not intended to be invoked by \`docker run\` command.
+Instead, it serves as a builder image that picks up a specified
+PHP application's source code (from a GIT repository) and creates
+a runnable RHEL-7 Docker image from it.
+
+See https://github.com/VojtechVitek/php#usage for more details.
+EOF

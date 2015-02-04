@@ -1,0 +1,36 @@
+#!/bin/bash -e
+
+# source "/etc/profile.d/enablehttpd24.sh"
+# source "/etc/profile.d/enablephp55.sh"
+
+if [ "$1" = "-h" ]; then
+  exec /opt/php/bin/usage
+fi
+
+if [ "$(ls /tmp/artifacts/ 2>/dev/null)" ]; then
+  echo "Restoring build artifacts"
+  mv /tmp/artifacts/* $HOME/.
+fi
+
+APP_SRC_DIR="/tmp/src"
+APP_RUNTIME_DIR="/var/www/html/"
+
+echo "---> Installing application source code"
+cp -Rf ${APP_SRC_DIR}/* ${APP_RUNTIME_DIR}
+
+echo '---> Setting Document Root to "'${APP_RUNTIME_DIR}/${DOCUMENT_ROOT}'"'
+ sed -i \
+    -e 's|^DocumentRoot \(.*\)$|DocumentRoot "'${APP_RUNTIME_DIR}/${DOCUMENT_ROOT}'"|g' \
+    /etc/httpd/conf/httpd.conf
+
+pushd "${APP_RUNTIME_DIR}" >/dev/null
+
+#TODO: PECL?
+echo "---> Setting PECL extensions"
+echo " == TODO =="
+
+#TODO: Composer
+echo "---> Building Composer dependencies"
+echo " == TODO =="
+
+popd >/dev/null
